@@ -3,20 +3,23 @@
 {% macro render_post(post, show_author=True) %}
 <div class="card post-card">
     {% if show_author and post.author_name %}
-    <div class="card-header">
-        <a href="{{ url_for('person_profile', person_id=post.author_id) }}" class="profile-link card-title">{{ post.author_name }}</a>
+    <div class="card-header d-flex align-items-center" style="gap: 12px; padding: 14px 16px;">
+        <div>
+            <a href="{{ url_for('person_profile', person_id=post.author_id) }}" class="profile-link card-title" style="margin: 0;">{{ post.author_name }}</a>
+            <small class="text-muted d-block" style="margin-top: 2px;">{{ post.post_timestamp | humanize_datetime }}</small>
+        </div>
     </div>
     {% endif %}
     <div class="card-body">
         {% if not show_author %}
-             <h6 class="card-subtitle mb-2 text-muted">{{ post.post_timestamp | humanize_datetime }}</h6>
+             <h6 class="card-subtitle mb-3">{{ post.post_timestamp | humanize_datetime }}</h6>
         {% endif %}
         <p class="card-text">{{ post.text }}</p>
     </div>
     {# --- Updated Action Placeholders --- #}
     <div class="post-actions">
-        <span>❤️ Like</span>    {# Kept #}
-        <span>💬 Comment</span> {# Kept #}
+        <span title="Like this post">❤️ Like</span>    {# Kept #}
+        <span title="Comment on this post">💬 Comment</span> {# Kept #}
     </div>
      {# --- End Action Placeholders --- #}
 </div>

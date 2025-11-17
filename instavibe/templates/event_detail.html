@@ -3,61 +3,87 @@
 {% block title %}Event: {{ event.name if event else "Details" }} - Instavibe{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
+<div class="container mt-5">
     {% if error %}
-        <div class="alert alert-danger" role="alert">
-            Could not load event details. Please try again later.
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="alert alert-danger" role="alert">
+                    <strong>Error:</strong> Could not load event details. Please try again later.
+                </div>
+            </div>
         </div>
     {% elif event %}
-        <div class="card">
-            <div class="card-header">
-                <h2>{{ event.name }}</h2>
-            </div>
-            <div class="card-body">
-                <p class="card-text"><strong>Date:</strong> {{ event.event_date | humanize_datetime if event.event_date else 'N/A' }}</p>
-                {% if event.description %}
-                    <p class="card-text"><strong>Description:</strong> {{ event.description }}</p>
-                {% endif %}
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="mb-0">📅 {{ event.name }}</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-4">
+                            <p class="mb-2"><strong>📆 Date:</strong></p>
+                            <p class="ms-3">{{ event.event_date | humanize_datetime if event.event_date else 'N/A' }}</p>
+                        </div>
+                        
+                        {% if event.description %}
+                            <div class="mb-4">
+                                <p class="mb-2"><strong>📝 Description:</strong></p>
+                                <p class="ms-3">{{ event.description }}</p>
+                            </div>
+                        {% endif %}
 
-                {% if event.locations and event.locations|length > 0 %}
-                    <h5 class="mt-4">Location(s):</h5>
-                    {% if google_maps_api_key %}
-                        <div id="eventMap" style="height: 400px; width: 100%;" class="mb-3"></div>
-                    {% else %}
-                        <div class="alert alert-warning">Map display is unavailable (API key missing).</div>
-                        <ul>
-                        {% for loc in event.locations %}
-                            <li>
-                                <strong>{{ loc.name }}</strong>{% if loc.address %} ({{ loc.address }}){% endif %}<br>
-                                {% if loc.description %}<small>{{ loc.description }}</small>{% endif %}
-                            </li>
-                        {% endfor %}
-                        </ul>
-                    {% endif %}
-                {% else %}
-                    <p><em>No specific locations listed for this event.</em></p>
-                {% endif %}
+                        {% if event.locations and event.locations|length > 0 %}
+                            <div class="mb-4">
+                                <h5 class="mb-3">📍 Location(s):</h5>
+                                {% if google_maps_api_key %}
+                                    <div id="eventMap" style="height: 400px; width: 100%; border-radius: 8px;" class="mb-3 border"></div>
+                                {% else %}
+                                    <div class="alert alert-warning">Map display is unavailable (API key missing).</div>
+                                    <ul class="list-group list-group-flush ms-3">
+                                    {% for loc in event.locations %}
+                                        <li class="list-group-item">
+                                            <strong>{{ loc.name }}</strong>{% if loc.address %}<br><small>{{ loc.address }}</small>{% endif %}<br>
+                                            {% if loc.description %}<small class="text-muted">{{ loc.description }}</small>{% endif %}
+                                        </li>
+                                    {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            </div>
+                        {% else %}
+                            <div class="mb-4 alert alert-info">
+                                <p class="mb-0">No specific locations listed for this event.</p>
+                            </div>
+                        {% endif %}
 
-                <h5 class="mt-4">Attendees ({{ event.attendees|length }}):</h5>
-                {% if event.attendees and event.attendees|length > 0 %}
-                    <ul class="list-group list-group-flush">
-                        {% for attendee in event.attendees %}
-                            <li class="list-group-item">
-                                <a href="{{ url_for('person_profile', person_id=attendee.person_id) }}">{{ attendee.name }}</a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                {% else %}
-                    <p><em>No attendees listed yet.</em></p>
-                {% endif %}
-            </div>
-            <div class="card-footer">
-                <a href="{{ url_for('home') }}" class="btn btn-secondary">Back to Home</a>
+                        <div>
+                            <h5 class="mb-3">👥 Attendees ({{ event.attendees|length }}):</h5>
+                            {% if event.attendees and event.attendees|length > 0 %}
+                                <ul class="list-group list-group-flush">
+                                    {% for attendee in event.attendees %}
+                                        <li class="list-group-item">
+                                            <a href="{{ url_for('person_profile', person_id=attendee.person_id) }}" class="profile-link">{{ attendee.name }}</a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <p class="text-muted">No attendees listed yet.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="card-footer text-start">
+                        <a href="{{ url_for('home') }}" class="btn btn-secondary">Back to Home</a>
+                    </div>
+                </div>
             </div>
         </div>
     {% else %}
-        <div class="alert alert-info" role="alert">
-            Event not found.
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="alert alert-info" role="alert">
+                    <div style="font-size: 2rem; margin-bottom: 12px;">🔍</div>
+                    Event not found.
+                </div>
+            </div>
         </div>
     {% endif %}
 </div>

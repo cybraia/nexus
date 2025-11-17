@@ -11,9 +11,9 @@
   </head>
   <body>
     <!-- Navbar changed to white with a bottom border, like Google's style -->
-    <nav class="navbar navbar-expand-md navbar-light fixed-top bg-white" style="border-bottom: 1px solid #dadce0;">
+    <nav class="navbar navbar-expand-md navbar-light fixed-top bg-white">
       <div class="container-fluid main-content-area"> {# Apply max-width here #}
-        <a class="navbar-brand" href="/"><img src="{{ url_for('static', filename='logo.png') }}" alt="InstaVibe Logo" style="height: 40px;"></a>
+        <a class="navbar-brand" href="/">InstaVibe</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -23,12 +23,14 @@
               <a class="nav-link active" aria-current="page" href="{{ url_for('home') }}">Home</a>
             </li>
             {# Add other nav items if needed #}
-            <!--REPLACE_ME_LINK_TO_INTROVERT_ALLY-->
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('ally.introvert_ally_page') }}">Introvert Ally</a>
+            </li>
           </ul>
           <!-- User display added here -->
-          <span class="navbar-text ms-auto">
-            <img src="{{ url_for('static', filename='alice.png') }}" alt="User Avatar" style="height: 40px; border-radius: 50%;">
-            Alice
+          <span class="navbar-text ms-auto d-flex align-items-center" style="gap: 12px;">
+            <img src="{{ url_for('static', filename='alice.png') }}" alt="User Avatar" style="height: 40px; width: 40px; border-radius: 50%; object-fit: cover;">
+            <span style="font-weight: 500;">Krishna</span>
           </span>
         </div>
       </div>

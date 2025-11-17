@@ -3,26 +3,25 @@
 {% block title %}{{ title or "Posting Status" }}{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
-    <h2>{{ title }}</h2>
-    <hr>
-
-    <div class="row">
-        <div class="col-md-8 offset-md-2">
-            <h4>Agent's Posting Process</h4>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-7">
             <div class="card">
                 <div class="card-header">
-                    Live Log
+                    <h3 class="mb-0">{{ title }}</h3>
                 </div>
-                <div id="agentPostingStream" class="card-body" style="max-height: 400px; overflow-y: auto; font-size: 0.85em;">
-                    <ul class="list-unstyled">
-                        <!-- Thoughts will be populated by JS -->
-                    </ul>
-                    <p id="postingPlaceholder">Initializing agent to post your event and invite<img src="{{ url_for('static', filename='loading.gif') }}" alt="Loading Spinner" style="width:40px;"/></p>
-                </div>
-                <div class="card-footer" id="statusFooter" style="display: none;">
-                    <p id="finalStatusMessage">Processing complete.</p>
-                    <a href="{{ url_for('home') }}" class="btn btn-primary">Go to Homepage</a>
+                <div class="card-body">
+                    <h5 class="mb-4">Agent's Posting Process</h5>
+                    <div id="agentPostingStream" class="rounded-lg border" style="max-height: 400px; overflow-y: auto; font-size: 0.85em; padding: 16px; background-color: #f9fafb;">
+                        <ul class="list-unstyled">
+                            <!-- Thoughts will be populated by JS -->
+                        </ul>
+                        <p id="postingPlaceholder">Initializing agent to post your event and invite<img src="{{ url_for('static', filename='loading.gif') }}" alt="Loading Spinner" style="width:40px; margin-left: 8px;"/></p>
+                    </div>
+                    <div class="mt-4 p-4 rounded-lg" id="statusFooter" style="display: none; background-color: #ecfdf5; border: 1px solid #d1fae5;">
+                        <p id="finalStatusMessage" class="mb-3">Processing complete.</p>
+                        <a href="{{ url_for('home') }}" class="btn btn-primary">Go to Homepage</a>
+                    </div>
                 </div>
             </div>
         </div>
