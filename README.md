@@ -1,6 +1,3 @@
-# Nexus
------
-
 # 🚀 Building an Intelligent Multi-Agent System on Google Cloud Platform with Gemini: Nexus
 
 In today’s rapidly evolving AI landscape, building intelligent applications often requires more than just a single large language model (LLM). It demands sophisticated **orchestration**, **specialized agents**, and robust cloud infrastructure. This post delves into the architecture and implementation of **Nexus**, an intelligent multi-agent system designed to dynamically understand, process, and act upon complex user requests, all powered by Google’s **Gemini models** and deployed entirely on **Google Cloud Platform (GCP)**.
